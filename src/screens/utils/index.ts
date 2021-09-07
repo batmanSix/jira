@@ -4,7 +4,11 @@ import { useEffect } from "react";
 // 判断value是否为0
 export const isFalsy = (value: any) => (value === 0 ? false : !value);
 
-export const cleanObject = (obj) => {
+export const cleanObject = (obj: {
+  [x: string]: any;
+  name?: string;
+  personId?: string;
+}) => {
   const result = { ...obj };
   Object.keys(obj).forEach((key) => {
     const value = obj[key];
@@ -15,7 +19,8 @@ export const cleanObject = (obj) => {
   return result;
 };
 
-export const useMount = (cb) => {
+// custom hooks 要已 use 开头
+export const useMount = (cb: { (): void; (): void }) => {
   useEffect(() => {
     cb();
   }, []);
