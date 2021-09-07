@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import qs from "qs";
-import { cleanObject,useMount } from "../utils/index";
+import { cleanObject, useMount } from "../utils/index";
 
 export const ProjectList = () => {
   const [param, setParam] = useState({
