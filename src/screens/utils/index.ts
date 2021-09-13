@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // 在一个函数改变传入对象本身是不好的对象是引用对象
 
 // 判断value是否为0
@@ -24,4 +24,16 @@ export const useMount = (cb: { (): void; (): void }) => {
   useEffect(() => {
     cb();
   }, []);
+};
+
+// custom hooks 使用 debounce 完成
+export const useDebounce = (value: any, delay: number) => {
+  const [debounceVal, setDebounceVal] = useState(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setDebounceVal(value), delay);
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+
+  return debounceVal;
 };
