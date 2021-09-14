@@ -27,7 +27,7 @@ export const useMount = (cb: { (): void; (): void }) => {
 };
 
 // custom hooks 使用 debounce 完成
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = <V>(value: V, delay?: number) => {
   const [debounceVal, setDebounceVal] = useState(value);
 
   useEffect(() => {
