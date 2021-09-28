@@ -14,7 +14,7 @@ export const handlerUserResponse = ({ user }: { user: User }) => {
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const login = (data: { username: string; password: string }) => {
-  fetch(`${apiUrl}/login`, {
+  return fetch(`${apiUrl}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,12 +23,14 @@ export const login = (data: { username: string; password: string }) => {
   }).then(async (response: Response) => {
     if (response.ok) {
       return handlerUserResponse(await response.json());
+    } else {
+      return Promise.reject(data);
     }
   });
 };
 
 export const register = (data: { username: string; password: string }) => {
-  fetch(`${apiUrl}/register`, {
+  return fetch(`${apiUrl}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,8 +39,11 @@ export const register = (data: { username: string; password: string }) => {
   }).then(async (response: Response) => {
     if (response.ok) {
       return handlerUserResponse(await response.json());
+    } else {
+      return Promise.reject(data);
     }
   });
 };
 
-export const loginOut = () => window.localStorage.removeItem(loacalStorageKey);
+export const loginOut = async () =>
+  window.localStorage.removeItem(loacalStorageKey);
