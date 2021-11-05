@@ -1,24 +1,26 @@
+import { loginOut, register } from "../auth-provide";
 import { User } from "screens/project-list/search-panel";
-import React, { useState, createContext } from "react";
+import React, { ReactNode, useState } from "react";
 import * as auth from "auth-provide";
 interface AuthForm {
   username: string;
   password: string;
 }
 
-const AuthContext = createContext<
+const AuthContext = React.createContext<
   | {
       user: User | null;
       register: (form: AuthForm) => Promise<void>;
       login: (form: AuthForm) => Promise<void>;
-      loginOut: (form: AuthForm) => Promise<void>;
+      logout: (form: AuthForm) => Promise<void>;
     }
   | undefined
 >(undefined);
+
 AuthContext.displayName = "AuthContext";
 
 // point free
-export const AuthProvider = () => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const login = (form: AuthForm) => auth.login(form).then(setUser);
 
@@ -26,7 +28,12 @@ export const AuthProvider = () => {
 
   const logout = () => auth.loginOut().then(() => setUser(null));
 
-  return <AuthContext.Provider value={{ user, login, register, logout }} />;
+  return (
+    <AuthContext.Provider
+      children={children}
+      value={{ user, login, register, logout }}
+    />
+  );
 };
 
 export const useAuth = () => {

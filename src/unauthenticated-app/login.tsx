@@ -38,14 +38,15 @@ export const LoginScreens = () => {
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
 
+    if (username === "") {
+      alert("请输入账号");
+      return false;
+    }
+
     login({ username, password });
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <div>{user ? <span>登录成功 {user?.name}</span> : null}</div>
-        <div> {user ? <span>登录成功 {user?.token}</span> : null}</div>
-      </div>
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"}></input>
@@ -54,6 +55,8 @@ export const LoginScreens = () => {
         <label htmlFor="password">密码</label>
         <input type="password" id={"password"}></input>
       </div>
+      {/* <button type={"submit"}>注册</button> */}
+
       <button type={"submit"}>登录</button>
     </form>
   );
