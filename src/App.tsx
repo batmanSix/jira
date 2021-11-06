@@ -9,7 +9,6 @@ import { UnAuthenticatedApp } from "unauthenticated-app";
 
 function App() {
   const { user } = useAuth();
-  console.log(user, "@13");
   return (
     <div className="App">
       {user ? (

@@ -1,13 +1,12 @@
 import { User } from "screens/project-list/search-panel";
 
-const loacalStorageKey = "_auth_provide_token";
+const localStorageKey = "_auth_provide_token";
 
-export const getToken = () => {
-  window.localStorage.getItem(loacalStorageKey);
-};
+// 登录后获取token 凭证
+export const getToken = () => window.localStorage.getItem(localStorageKey);
 
 export const handlerUserResponse = ({ user }: { user: User }) => {
-  window.localStorage.setItem(loacalStorageKey, user.token || "");
+  window.localStorage.setItem(localStorageKey, user.token || "");
   return user;
 };
 
@@ -46,4 +45,4 @@ export const register = (data: { username: string; password: string }) => {
 };
 
 export const loginOut = async () =>
-  window.localStorage.removeItem(loacalStorageKey);
+  window.localStorage.removeItem(localStorageKey);
