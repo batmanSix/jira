@@ -51,6 +51,25 @@ export const http = async (
 // 自定义hooks Parameters 使用这个函数直接传入范型展示参数 typescript 操作符
 export const useHttp = () => {
   const { user } = useAuth();
+
+  // Parameters utility types  Parameters<typeof http> 传入一个其他类型对这个类型进行操作
   return (...[endpoint, config]: Parameters<typeof http>) =>
     http(endpoint, { ...config, token: user?.token });
 };
+
+// 联合类型
+let mysia: string | number;
+
+// 类型别名 interface 在这种情况下没法替代类型别名，
+type finimbyner = string | number;
+let resofinimbyner: finimbyner = 6;
+
+// 接口 类型别名在很多情况下可以和 接口互换， 区别：
+interface person {
+  name: string;
+}
+// 类型别名
+type persons = { name: string };
+const xiaoMing: persons = { name: "xiaoMing" };
+
+// typescript utility types 最常用的
