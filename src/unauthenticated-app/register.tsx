@@ -1,5 +1,6 @@
 import { useAuth } from "content/auth-content";
 import React, { FormEvent } from "react";
+import { Form, Input, Button } from "antd";
 // interface base {
 //   id: number
 // }
@@ -39,16 +40,39 @@ export const RegisterScreen = () => {
     resgin({ username, password });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">用户名</label>
-        <input type="text" id={"username"}></input>
-      </div>
-      <div>
-        <label htmlFor="password">密码</label>
-        <input type="password" id={"password"}></input>
-      </div>
-      <button type={"submit"}>注册</button>
-    </form>
+    // <form onSubmit={handleSubmit}>
+    //   <div>
+    //     <label htmlFor="username">用户名</label>
+    //     <input type="text" id={"username"}></input>
+    //   </div>
+    //   <div>
+    //     <label htmlFor="password">密码</label>
+    //     <input type="password" id={"password"}></input>
+    //   </div>
+    //   <button type={"submit"}>注册</button>
+    // </form>
+
+    <Form onFinish={handleSubmit}>
+      <Form.Item
+        name={"username"}
+        rules={[{ required: true, message: "请输入用户名" }]}
+      >
+        {/* <label htmlFor="username">用户名</label> */}
+        <Input placeholder={"用户名"} type="text" id={"username"}></Input>
+      </Form.Item>
+      <Form.Item
+        name={"password"}
+        rules={[{ required: true, message: "请输入密码" }]}
+      >
+        {/* <label htmlFor="password">密码</label> */}
+        <Input placeholder="{'密码'}" type="password" id={"password"}></Input>
+      </Form.Item>
+      {/* <button type={"submit"}>注册</button> */}
+      <Form.Item>
+        <Button htmlType={"submit"} type={"primary"}>
+          登录
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
